@@ -41,6 +41,17 @@ namespace UdemyProject2.Managers
             yield return SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + levelIndex);
         }
 
+        public void LoadMenuScene()
+        {
+            StartCoroutine(LoadMenuSceneAsync());
+        }
+
+        private IEnumerator LoadMenuSceneAsync()
+        {
+            yield return new WaitForSeconds(delayLevelTime);
+            yield return SceneManager.LoadSceneAsync("Menu");
+        }
+
         public void ExitGame()
         {
             Debug.Log("Quit Game Triggered");

@@ -4,6 +4,7 @@ using UdemyProject2.Inputs;
 using UdemyProject2.Movements;
 using UdemyProject2.Animations;
 using UdemyProject2.Combats;
+using UdemyProject2.Uis;
 using UnityEngine;
 
 
@@ -11,6 +12,8 @@ namespace UdemyProject2.Controller
 {
     public class PlayerController : MonoBehaviour
     {
+        
+        
         float _vertical;
         float _horizontal;
         bool _isJump;
@@ -25,14 +28,11 @@ namespace UdemyProject2.Controller
         Climbing _climbing;
         Health _health;
 
-
-        
-
         private void Awake()
         {
             _input = new PcInput(); //instance yeni sınıf kullanılıyor.
             
-            
+            _mover = GetComponent<Mover>();
             _jump = GetComponent<Jump>();
             _playerAnimation = GetComponent<PlayerAnimation>();
             _playerflip = GetComponent<Flip>();
@@ -41,8 +41,20 @@ namespace UdemyProject2.Controller
             _health = GetComponent<Health>();
         }
 
+        private void Start()
+        {
+            GameCanvas gameCanvas = FindObjectOfType<GameCanvas>();
+
+            if(gameCanvas != null)
+            {
+                _health.OnDead += gameCanvas.ShowGameOverPanel;
+            }
+        }
+
         private void Update()
         {
+            if(_health.IsDead) return;
+            
             _horizontal = _input.Horizontal;
             _vertical = _input.Vertical;
 

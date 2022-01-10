@@ -11,6 +11,7 @@ namespace UdemyProject2.Combats
 
         public bool IsDead => currentHealth < 1;
         public event System.Action OnHealthChanged;
+        public event System.Action OnDead;
 
         private void Awake()
         {
@@ -22,7 +23,15 @@ namespace UdemyProject2.Combats
             if(IsDead) return;
 
             currentHealth -= damage.HitDamage;
-            OnHealthChanged?.Invoke();
+
+            if (IsDead)
+            {
+                OnDead?.Invoke();
+            }
+            else
+            {
+                OnHealthChanged?.Invoke();
+            }
         }
     }
 }
