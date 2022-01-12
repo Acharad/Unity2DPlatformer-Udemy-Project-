@@ -8,8 +8,11 @@ namespace UdemyProject2.Managers
     public class GameManager : MonoBehaviour
     {
         [SerializeField] float delayLevelTime = 1f;
+        [SerializeField] int score;
 
         public static GameManager Instance { get; private set;}
+
+        public event System.Action<int> OnScoreChanged;
 
         void Awake()
         {
@@ -56,6 +59,12 @@ namespace UdemyProject2.Managers
         {
             Debug.Log("Quit Game Triggered");
             Application.Quit();
+        }
+
+        public void IncreaseScore(int score = 0)
+        {
+            this.score += score;
+            OnScoreChanged?.Invoke(this.score);
         }
     }
 }

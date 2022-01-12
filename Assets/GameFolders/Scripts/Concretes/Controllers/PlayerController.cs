@@ -5,6 +5,7 @@ using UdemyProject2.Movements;
 using UdemyProject2.Animations;
 using UdemyProject2.Combats;
 using UdemyProject2.Uis;
+using UdemyProject2.ExtensionMethods;
 using UnityEngine;
 
 
@@ -41,13 +42,15 @@ namespace UdemyProject2.Controller
             _health = GetComponent<Health>();
         }
 
-        private void Start()
+        private void OnEnable()
         {
             GameCanvas gameCanvas = FindObjectOfType<GameCanvas>();
 
             if(gameCanvas != null)
             {
                 _health.OnDead += gameCanvas.ShowGameOverPanel;
+                DisplayHealth displayHealth = gameCanvas.GetComponentInChildren<DisplayHealth>();
+                _health.OnHealthChanged += displayHealth.WriteHealth;
             }
         }
 
@@ -89,7 +92,13 @@ namespace UdemyProject2.Controller
         {
             Damage damage = collision.collider.GetComponent<Damage>();
 
-            if (damage != null)
+            if (collision.HasHitEnemy() && collision.WasHitLeftOrRightSide())
+            {
+                damage.HitTarget(_health);
+                return;
+            }
+
+            if(damage != null && !collision.HasHitEnemy())
             {
                 damage.HitTarget(_health);
             }

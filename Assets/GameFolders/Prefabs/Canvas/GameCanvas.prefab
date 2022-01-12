@@ -386,6 +386,7 @@ GameObject:
   - component: {fileID: 1093509861}
   - component: {fileID: 1093509863}
   - component: {fileID: 1093509862}
+  - component: {fileID: 5366765406561451528}
   m_Layer: 5
   m_Name: HealthText
   m_TagString: Untagged
@@ -509,6 +510,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5366765406561451528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1093509860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bd5ce798221b0f4a8f1fa356cc1e33d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1166868614
 GameObject:
   m_ObjectHideFlags: 0
@@ -1165,6 +1178,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8075730960877423791}
   m_CullTransparentMesh: 1
+--- !u!114 &232087811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9179750244362873138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c265a2d0fc2b86c4ca8d356fb603ec69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gamePlayObject: {fileID: 0}
+  gameOverPanel: {fileID: 0}
 --- !u!1 &8707864671379177828
 GameObject:
   m_ObjectHideFlags: 0
@@ -1299,20 +1326,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &232087811
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9179750244362873138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c265a2d0fc2b86c4ca8d356fb603ec69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gamePlayObject: {fileID: 0}
-  gameOverPanel: {fileID: 0}
 --- !u!1001 &8682410380780246915
 PrefabInstance:
   m_ObjectHideFlags: 0
