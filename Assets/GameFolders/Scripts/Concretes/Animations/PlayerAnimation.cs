@@ -36,6 +36,11 @@ namespace UdemyProject2.Animations
 
             _animator.SetBool("isClimb", isClimb);
         }
+
+        public void DeathAnimation()
+        {
+            _animator.SetTrigger("death");
+        }
     }
 }
 

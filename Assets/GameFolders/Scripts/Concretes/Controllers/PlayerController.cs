@@ -28,6 +28,7 @@ namespace UdemyProject2.Controller
         OnGround _onGround;
         Climbing _climbing;
         Health _health;
+        Damage _damage;
 
         private void Awake()
         {
@@ -40,6 +41,7 @@ namespace UdemyProject2.Controller
             _onGround = GetComponent<OnGround>();
             _climbing = GetComponent<Climbing>();
             _health = GetComponent<Health>();
+            _damage = GetComponent<Damage>();
         }
 
         private void OnEnable()
@@ -90,17 +92,12 @@ namespace UdemyProject2.Controller
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            Damage damage = collision.collider.GetComponent<Damage>();
+            Health health = collision.ObjectHasHealth();
 
-            if (collision.HasHitEnemy() && collision.WasHitLeftOrRightSide())
+            if(health != null && collision.WasHitTopSide())
             {
-                damage.HitTarget(_health);
-                return;
-            }
-
-            if(damage != null && !collision.HasHitEnemy())
-            {
-                damage.HitTarget(_health);
+                health.TakeHit(_damage);
+                _jump.JumpAction(250f);
             }
         }
     }

@@ -13,8 +13,9 @@ namespace UdemyProject2.Controller
        Mover _mover;
        Health _health;
        Flip _flip;
-       Animation _enemyAnimation;
+       PlayerAnimation _enemyAnimation;
        OnReachedEdge _onReachedEdge;
+       Damage _damage;
 
        bool _isOnEdge;
        float _direction;
@@ -25,6 +26,8 @@ namespace UdemyProject2.Controller
            _health = GetComponent<Health>();
            _flip = GetComponent<Flip>();
            _onReachedEdge = GetComponent<OnReachedEdge>();
+           _damage = GetComponent<Damage>();
+           _enemyAnimation = GetComponent<PlayerAnimation>();
 
            _direction = 1f;
        }
@@ -54,16 +57,23 @@ namespace UdemyProject2.Controller
 
        private void OnCollisionEnter2D(Collision2D collision)
        {
-            Damage damage = collision.collider.GetComponent<Damage>();
+           Health health = collision.ObjectHasHealth();
 
-            if (collision.HasHitPlayeR() && collision.WasHitBottomSide())
-                {
-                    damage.HitTarget(_health);
-                }   
+           if(health != null && collision.WasHitLeftOrRightSide())
+           {
+               health.TakeHit(_damage);
+           }
        }
 
        private void DeadAction()
        {
+           StartCoroutine(DeadActionAsync());
+       }
+
+       private IEnumerator DeadActionAsync()
+       {
+           _enemyAnimation.DeathAnimation();
+           yield return new WaitForSeconds(0.3f);
            Destroy(this.gameObject);
        }
     }

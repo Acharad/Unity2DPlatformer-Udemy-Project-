@@ -7,7 +7,7 @@ namespace UdemyProject2.Movements
     [RequireComponent(typeof(Rigidbody2D))]
     public class Jump : MonoBehaviour
     {
-        [SerializeField] float jumpForce = 300f;
+        [SerializeField] float jumpForce;
 
         Rigidbody2D _rigidbody2D;
 
@@ -18,7 +18,7 @@ namespace UdemyProject2.Movements
             _rigidbody2D = GetComponent<Rigidbody2D>();
         }
         
-        public void JumpAction()
+        public void JumpAction(float jumpForce = 400f)
         {
             _rigidbody2D.velocity = Vector2.zero;
             _rigidbody2D.AddForce(Vector2.up * jumpForce);
