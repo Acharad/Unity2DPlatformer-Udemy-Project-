@@ -10,6 +10,8 @@ namespace UdemyProject2.Controller
 {
     public class EnemyController : MonoBehaviour
     {
+       [SerializeField] AudioClip deadClip;
+
        Mover _mover;
        Health _health;
        Flip _flip;
@@ -19,6 +21,8 @@ namespace UdemyProject2.Controller
 
        bool _isOnEdge;
        float _direction;
+
+       public static event System.Action<AudioClip> OnEnemyDead;
 
        private void Awake()
        {
@@ -35,6 +39,8 @@ namespace UdemyProject2.Controller
        private void OnEnable()
        {
            _health.OnDead += DeadAction;
+           _health.OnDead += () => OnEnemyDead.Invoke(deadClip);
+           
        }
 
        private void FixedUpdate()

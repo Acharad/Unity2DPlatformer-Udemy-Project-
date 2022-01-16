@@ -23,7 +23,7 @@ namespace UdemyProject2.Managers
             _health.OnHealthChanged += HandleHealthChanged;
         }
 
-        private void HandleHealthChanged(int _currentHealth)
+        private void HandleHealthChanged(int _currentHealth, int maxHealth)
         {
             _health.transform.position = _checkpointController.LastOrDefault(x => x.IsPassed).transform.position; 
         }

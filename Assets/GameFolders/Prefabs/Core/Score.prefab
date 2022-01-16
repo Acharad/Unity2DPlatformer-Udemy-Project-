@@ -164,3 +164,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 1
+  scoreClip: {fileID: 8300000, guid: 465252b1f527fcd4f9cefc720a141eba, type: 3}

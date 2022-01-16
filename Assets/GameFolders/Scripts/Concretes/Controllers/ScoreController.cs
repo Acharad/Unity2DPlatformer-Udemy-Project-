@@ -9,6 +9,9 @@ namespace UdemyProject2.Controller
     public class ScoreController : MonoBehaviour
     {
         [SerializeField] int score = 1;
+        [SerializeField] AudioClip scoreClip;
+
+        public static event System.Action<AudioClip> OnScoreSound;
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -17,6 +20,7 @@ namespace UdemyProject2.Controller
             if(player != null)
             {
                 GameManager.Instance.IncreaseScore(score);
+                OnScoreSound.Invoke(scoreClip);
                 Destroy(this.gameObject);
             }
         }

@@ -13,7 +13,7 @@ namespace UdemyProject2.Controller
 {
     public class PlayerController : MonoBehaviour
     {
-        
+        [SerializeField] AudioClip deadClip;
         
         float _vertical;
         float _horizontal;
@@ -29,6 +29,9 @@ namespace UdemyProject2.Controller
         Climbing _climbing;
         Health _health;
         Damage _damage;
+        AudioSource _audioSource;
+
+        public static event System.Action<AudioClip> OnPlayerDead;
 
         private void Awake()
         {
@@ -42,6 +45,7 @@ namespace UdemyProject2.Controller
             _climbing = GetComponent<Climbing>();
             _health = GetComponent<Health>();
             _damage = GetComponent<Damage>();
+            _audioSource = GetComponent<AudioSource>();
         }
 
         private void OnEnable()
@@ -54,6 +58,9 @@ namespace UdemyProject2.Controller
                 DisplayHealth displayHealth = gameCanvas.GetComponentInChildren<DisplayHealth>();
                 _health.OnHealthChanged += displayHealth.WriteHealth;
             }
+
+            _health.OnDead += () => OnPlayerDead.Invoke(deadClip);
+            _health.OnHealthChanged += PlayOnHit;
         }
 
         private void Update()
@@ -99,6 +106,12 @@ namespace UdemyProject2.Controller
                 health.TakeHit(_damage);
                 _jump.JumpAction(250f);
             }
+        }
+
+        public void PlayOnHit(int currentHealth, int maxHealth)
+        {
+            if(currentHealth == maxHealth) return;
+            _audioSource.Play();
         }
     }
 }

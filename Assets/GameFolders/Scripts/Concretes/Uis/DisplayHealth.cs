@@ -14,7 +14,7 @@ namespace UdemyProject2.Uis
             _healthText = GetComponent<TextMeshProUGUI>();
         }
 
-        public void WriteHealth(int currentHealth)
+        public void WriteHealth(int currentHealth, int maxHealth)
         {
             _healthText.text = currentHealth.ToString();
         }
